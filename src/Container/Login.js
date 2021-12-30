@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button ,{ ButtonType } from '../Componets/Common/Button/Button';
 
 function Login(props) {
     const [userType, setuserType] = useState('Login')
@@ -78,12 +79,13 @@ function Login(props) {
                     <div className="mt-4">
                         {
                             reset === true ?
-                                <button type="submit" onClick={() => handleReset()}>Submit</button>
+                                <Button  buttonType={ButtonType.PRIMARY}  type="submit" onClick={() => handleReset()}>Submit</Button>
+                        
                                 :
                                 userType === 'Login' ?
-                                    <button className="border-0 bg-primary text-white py-2 px-3" type="submit" onClick={() => handleLogin()}>Log in</button>
+                                    <Button  buttonType={ButtonType.PRIMARY} type="submit" onClick={() => handleLogin()}>Log in</Button>
                                     :
-                                    <button className="border-0 bg-primary text-white py-2 px-3" type="submit" onClick={() => handleSignup()}>sign up</button>
+                                    <Button  buttonType={ButtonType.PRIMARY} type="submit" onClick={() => handleSignup()}>sign up</Button>
                         }
                     </div>
                     <div className="text-center my-4 ps-0">
@@ -91,17 +93,17 @@ function Login(props) {
                             userType === 'Login' ?
                                 <div>
                                     <label  className="pe-2">don't have an account :</label>
-                                    <button className="border-0 bg-primary text-white py-2 px-3" onClick={() => { setReset(); setuserType('Signup') }}>Sign up</button>
+                                    <Button  buttonType={ButtonType.LINK} onClick={() => { setReset(); setuserType('Signup') }}>Sign up</Button>
                                 </div>
                                 :
                                 <div>
                                     <label>Already have an account?</label>
-                                    <button className="border-0 bg-primary text-white py-2 px-3" onClick={() => { setReset(); setuserType('Login') }}>Log in</button>
+                                    <Button  buttonType={ButtonType.LINK} onClick={() => { setReset(); setuserType('Login') }}>Log in</Button>
                                 </div>
                         }
                     </div>
                     <div className="text-center">
-                        <div> forgot password ? <button className="border-0 bg-white text-primary" onClick={() => setReset(true)}>Click</button></div>
+                        <div> forgot password ? <Button  buttonType={ButtonType.LINK} onClick={() => setReset(true)}>Click</Button></div>
                     </div>
 
                 </div>

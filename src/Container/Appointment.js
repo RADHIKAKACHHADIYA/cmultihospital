@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import Button ,{ ButtonType } from '../Componets/Common/Button/Button';
 
 function appointment(props) {
     return (
@@ -50,8 +52,11 @@ function appointment(props) {
                             <div className="error-message" />
                             <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                        <div className="text-center"><button type="submit">Make an Appointment</button></div>
+                        <div className="text-center"><Button buttonType={ButtonType.PRIMARY} type="submit">Make an Appointment</Button></div>
                     </form>
+                    <div className='text-center mt-3'>
+                        <Link to='/Count'>Count</Link>
+                    </div>
                 </div>
             </section>
         </div>
