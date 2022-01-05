@@ -103,7 +103,7 @@ function Medicine(props) {
                     >
                         <option value="0">--select--</option>
                         <option value="lh">Price: Low to High</option>
-                        <option value="hl">Price: High to Low</option>
+                        <option value="hl">Price: High to to  Low</option>
                         <option value="q">Quantity</option>
                         <option value="e">Expiry</option>
                     </InputBox>
