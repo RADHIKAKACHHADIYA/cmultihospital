@@ -1,39 +1,43 @@
+import React from 'react';
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 
-import React from 'react';
 
-function List(props) {
+function List({ data }) {
     return (
-        <div>
-            <div className="container">
-                <div className="section-title">
-                    <h2>Medicine</h2>
-                </div>
-                <div className="row">
-                    <div className="col-lg-4 mb-5">
-                        <div>
-                            <Card>
-                                <CardBody>
-                                    <CardTitle tag="h5">
-                                        Card title
-                                    </CardTitle>
-                                    <CardSubtitle
-                                        className="mb-2 text-muted"
-                                        tag="h6"
-                                    >
-                                        Card subtitle
-                                    </CardSubtitle>
-                                    <CardText>
-                                        Some quick example text to build on the card title and make up the bulk of the card's content.
-                                    </CardText>
-                                </CardBody>
-                            </Card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+            <Card className="border mb-5 mx-4 col-3 ">
+                <CardBody>
+                    {
+                        data.name !== undefined ?
+                            <CardTitle tag="h5">
+                                Name : {data.name}
+                            </CardTitle>
+                        : null
+                    }
+
+                    {
+                        data.price !== undefined ?
+                            <CardSubtitle
+                            className="mb-2 text-muted"
+                            tag="h6"
+                            >
+                               Price : {data.price}
+                            </CardSubtitle>
+                        : null
+                        
+                    }
+                    {
+                        data.quantity && data.expiry !== undefined ?
+                            <CardText>
+                                Quantity : {data.quantity} <br />
+                                Expiry : {data.expiry}
+                            </CardText>
+                        : null
+                    }
+                    
+                   
+                </CardBody>
+            </Card>
+            );
 }
 
-export default List;
+            export default List;
