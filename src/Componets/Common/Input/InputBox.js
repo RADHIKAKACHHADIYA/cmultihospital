@@ -1,12 +1,19 @@
 
 import React from 'react';
-import { InputBoxStyle } from './InputBox.style';
+import { InputBoxStyle, InputError } from './InputBox.style';
 
-function InputBox({children, ...rest}) {
+function InputBox({children, errors=false , errorMessage='' ,...rest}) {
     return (
-        <InputBoxStyle {...rest}>
-            {children}
-        </InputBoxStyle>
+        <>
+            <InputBoxStyle {...rest}>
+                {children}
+            </InputBoxStyle>
+            <InputError
+                display={{errors:errors}}
+            >
+                {errorMessage}
+            </InputError>
+        </>
     );
 }
 

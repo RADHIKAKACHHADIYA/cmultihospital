@@ -23,3 +23,7 @@ export const InputBoxStyle = styled(Input)`
         border-color: #FF6337;
     }
 `;
+export const InputError = styled(FormFeedback)`
+    color: red;
+    display: ${props => props.display.errors ? 'flex' : 'none'}
+`;
