@@ -1,6 +1,6 @@
 
 import styled from 'styled-components';
-import { Input } from 'reactstrap';
+import { FormFeedback, Input } from 'reactstrap';
 
 export const InputBoxStyle = styled(Input)`
     height: 44px;

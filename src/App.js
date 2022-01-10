@@ -8,8 +8,8 @@ import Departments from './Container/Departments'
 import Doctors from './Container/Doctors'
 import Login from './Container/Login'
 import Medicine from './Container/Medicine';
-import Footer from './Componets/Footer';
 import Count from './Container/Count';
+import Footer from './Componets/Footer';
 
 import { Route , Switch } from 'react-router-dom';
 

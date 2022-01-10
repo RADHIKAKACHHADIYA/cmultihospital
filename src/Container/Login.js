@@ -31,7 +31,16 @@ function Login(props) {
     };
   let schema = yup.object().shape(signUpSchema);
 
-
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: schema,
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  });
       
     const { handleSubmit, errors, getFieldProps } = formik;
 
@@ -65,10 +74,9 @@ function Login(props) {
                                                         id="name"
                                                         onChange={(e) => setName(e.target.value)}
                                                         placeholder="Your Name"
-                                                        required
                                                     />
                                                 </div>
-                                                : null
+                                            : null
                                     }
                                 </div>
                             </div>
@@ -83,7 +91,6 @@ function Login(props) {
                                         {...getFieldProps("email")}
                                          errors={Boolean(errors.email)}
                                         errorMessage={errors.email}
-
                                     />
                                 </div>
                             </div>
@@ -107,11 +114,11 @@ function Login(props) {
                             <div className="mt-4">
                                 {
                                     reset === true ?
-                                        <Button buttonType={ButtonType.PRIMARY} type="submit" onClick={() => handleReset()}>Submit</Button>
+                                        <Button buttonType={ButtonType.PRIMARY} type="submit" >Submit</Button>
 
                                         :
                                         userType === 'Login' ?
-                                            <Button buttonType={ButtonType.PRIMARY} type="submit" type="submit">Log in</Button>
+                                            <Button buttonType={ButtonType.PRIMARY}  type="submit">Log in</Button>
                                             :
                                             <Button buttonType={ButtonType.PRIMARY} type="submit" onClick={() => handleSignup()}>sign up</Button>
                                 }
