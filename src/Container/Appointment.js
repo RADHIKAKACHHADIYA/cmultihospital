@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Button ,{ ButtonType } from '../Componets/Common/Button/Button';
-import InputBox from '../components/common/InputBox/InputBox';
+import InputBox from '../Componets/Common/Input/InputBox';
 import * as yup from 'yup';
 import { Form , FormikProvider, useFormik } from 'formik';
 
-function Appoinment(props) {
+function Appointment(props) {
     let AppoinmentSchema = {
         name: yup.string()
             .required('Username is must required'),
@@ -63,12 +62,10 @@ function Appoinment(props) {
                                             id="name" 
                                             placeholder="Your Name" 
                                             data-rule="minlen:4" 
-                                            // data-msg="Please enter at least 4 chars" 
                                             {...getFieldProps("name")}
                                             errors={Boolean(errors.name)}
                                             errorMessage={errors.name}
                                         />
-                                        {/* <div className="validate" /> */}
                                     </div>
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
                                         <InputBox 
@@ -78,12 +75,10 @@ function Appoinment(props) {
                                             id="email" 
                                             placeholder="Your Email" 
                                             data-rule="email" 
-                                            // data-msg="Please enter a valid email" 
                                             {...getFieldProps("email")}
                                             errors={Boolean(errors.email)}
                                             errorMessage={errors.email}
                                         />
-                                        {/* <div className="validate" /> */}
                                     </div>
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
                                         <InputBox 
@@ -93,12 +88,10 @@ function Appoinment(props) {
                                             id="phone" 
                                             placeholder="Your Phone" 
                                             data-rule="minlen:4" 
-                                            // data-msg="Please enter at least 4 chars" 
                                             {...getFieldProps("phone")}
                                             errors={Boolean(errors.phone)}
                                             errorMessage={errors.phone}
                                         />
-                                        {/* <div className="validate" /> */}
                                     </div>
                                 </div>
                                 <div className="row">
@@ -110,12 +103,10 @@ function Appoinment(props) {
                                             id="date" 
                                             placeholder="Appointment Date" 
                                             data-rule="minlen:4" 
-                                            // data-msg="Please enter at least 4 chars" 
                                             {...getFieldProps("date")}
                                             errors={Boolean(errors.date)}
                                             errorMessage={errors.date}
                                         />
-                                        {/* <div className="validate" /> */}
                                     </div>
                                     <div className="col-md-4 form-group mt-3">
                                         <select 
@@ -131,7 +122,6 @@ function Appoinment(props) {
                                             <option value="Department 2">Department-2</option>
                                             <option value="Department 3">Department-3</option>
                                         </select>
-                                        {/* <div className="validate" /> */}
                                     </div>
                                 </div>
                                 <div className="form-group mt-3">
@@ -145,7 +135,6 @@ function Appoinment(props) {
                                         errors={Boolean(errors.message)}
                                         errorMessage={errors.message}
                                     />
-                                    {/* <div className="validate" /> */}
                                 </div>
                                 {/* <div className="mb-3">
                                     <div className="loading">Loading</div>

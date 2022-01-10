@@ -1,6 +1,6 @@
 import React from 'react';
-import Button, { ButtonType } from '../components/common/button/Button';
-import InputBox from '../components/common/InputBox/InputBox';
+import Button, { ButtonType } from '../Componets/Common/Button/Button';
+import InputBox from '../Componets/Common/Input/InputBox';
 import * as yup from 'yup';
 import { Form, FormikProvider, useFormik } from 'formik';
 
