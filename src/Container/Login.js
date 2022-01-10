@@ -9,9 +9,15 @@ function Login(props) {
     const [name, setName] = useState('')
     const [reset, setReset] = useState(false)
 
-    const handleLogin = () => {
-        console.log(name)
-    }
+    const handleLogin = (values) => {
+            let usersData = JSON.parse(localStorage.getItem("users"))
+            if (usersData === null){
+              localStorage.setItem("users", JSON.stringify([values]))
+            } else {
+              usersData.push(values)
+              localStorage.setItem("users", JSON.stringify(usersData))
+            }
+    };
 
     const handleSignup = () => {
         console.log(name)
@@ -63,10 +69,17 @@ function Login(props) {
             password: "",
         },
         validationSchema: schema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            onSubmit: (values) => {
+                if (!reset && userType === "Signup") {
+                    handleSignup(values);
+                } else if (!reset && userType === "Login") {
+                    handleLogin(values);
+                } else {
+                    handleReset(values);
+                }
+              }
+            });
         }
-    });
 
     const { handleSubmit, errors, getFieldProps } = formik;
 
@@ -176,6 +189,6 @@ function Login(props) {
             </div>
         </div >
     );
-}
+
 
 export default Login;
