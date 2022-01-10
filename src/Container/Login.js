@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button, { ButtonType } from '../Componets/Common/Button/Button';
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import InputBox from "../Componets/Common/Input/InputBox";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
@@ -9,8 +8,6 @@ function Login(props) {
     const [userType, setuserType] = useState('Login')
     const [name, setName] = useState('')
     const [reset, setReset] = useState(false)
-    const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
 
     const handleLogin = () => {
         console.log(name)
@@ -23,11 +20,12 @@ function Login(props) {
     const handleReset = () => {
     }
 
+
     const handleGoogleLogin = () => {
     };
     const LoginSchema = {
         name: yup.string()
-            .required("name is must be requrired"),
+            .required("Name is must be requrired"),
         email: yup.string()
             .required("E-mail is must required")
             .email("Invalid"),
@@ -72,11 +70,12 @@ function Login(props) {
 
     const { handleSubmit, errors, getFieldProps } = formik;
 
+
     return (
         <div>
 
             <div className="container">
-                <div className="section-title">
+                <div className="section-title mt-4">
                     {
                         reset === true ? <h2> forgot password</h2> :
                             userType === 'Signup' ?

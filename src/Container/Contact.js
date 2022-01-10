@@ -110,10 +110,11 @@ function Contact(props) {
                                             />
                                         </div>
                                         <div className="form-group mt-3">
-                                            <textarea
+                                            <InputBox
                                                 className="form-control"
                                                 name="message"
                                                 id="message"
+                                                type="textarea"
                                                 placeholder="Message"
                                                 {...getFieldProps("message")}
                                                 errors={Boolean(errors.message)}

@@ -19,7 +19,7 @@ function Appointment(props) {
         message: yup.string()
             .required('messege is must required'),
         department: yup.string()
-            .required('messege is must required'),
+            .required('department is must required'),
     }
 
     let schema = yup.object().shape(AppoinmentSchema);
@@ -109,9 +109,10 @@ function Appointment(props) {
                                         />
                                     </div>
                                     <div className="col-md-4 form-group mt-3">
-                                        <select 
+                                        <InputBox 
                                             name="department" 
                                             id="department" 
+                                            type="select"
                                             className="form-select"
                                             {...getFieldProps("department")}
                                             errors={Boolean(errors.department)}
@@ -121,14 +122,14 @@ function Appointment(props) {
                                             <option value="Department 1">Department-1</option>
                                             <option value="Department 2">Department-2</option>
                                             <option value="Department 3">Department-3</option>
-                                        </select>
+                                        </InputBox>
                                     </div>
                                 </div>
                                 <div className="form-group mt-3">
-                                    <textarea 
+                                    <InputBox 
                                         className="form-control" 
                                         name="message" 
-                                        rows={5} 
+                                        type="textarea"
                                         id="message"
                                         placeholder="Message" 
                                         {...getFieldProps("message")}
