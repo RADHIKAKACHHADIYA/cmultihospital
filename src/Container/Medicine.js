@@ -2,7 +2,6 @@ import React from 'react';
 import List from '../Componets/Common/List/List';
 
 const orgData = [
-
     {
     id: 101,
     name: 'Abacavir',
