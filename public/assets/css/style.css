@@ -1752,3 +1752,30 @@ section {
 .main-header {
   height: 138px;
 }
+.actactive{
+  position: relative;
+  transition: all 0.10s;
+}
+
+.actactive::before{
+  content: "";
+  position: absolute;
+  display: block;
+  width:60%;
+  height: 3px;
+  background: #ddd;
+  bottom: -10px;
+  left: calc(35% - 20px);
+
+}
+.actactive::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width:20px;
+  height: 3px;
+  background: #1c84e3;
+  bottom: -10px;
+  left: calc(58% - 20px);
+
+}

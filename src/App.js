@@ -2,7 +2,8 @@ import './App.css';
 import Header from './Componets/Header';
 import Home from './Container/Home';
 import About from './Container/About';
-import BookAppointment from './Container/BookAppointment'
+import ListAppointment from './Container/Appointment/ListAppointment';
+import BookAppointment from './Container/Appointment/BookAppointment'
 import Contact from './Container/Contact'
 import Departments from './Container/Departments'
 import Doctors from './Container/Doctors'
@@ -20,7 +21,8 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route path='/About' component={About}/>
-          <Route path='/BookAppointment' component={BookAppointment}/>
+          <Route path='/listappointment' component={ListAppointment}/>
+          <Route path='/bookAppointment' component={BookAppointment}/>
           <Route path='/Contact' component={Contact}/>
           <Route path='/Departments' component={Departments}/>
           <Route path='/Doctors' component={Doctors}/>
