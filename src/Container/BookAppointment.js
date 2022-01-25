@@ -3,8 +3,9 @@ import Button ,{ ButtonType } from '../Componets/Common/Button/Button';
 import InputBox from '../Componets/Common/Input/InputBox';
 import * as yup from 'yup';
 import { Form , FormikProvider, useFormik } from 'formik';
+import { NavLink } from 'react-router-dom';
 
-function Appointment(props) {
+function BookAppointment(props) {
     let AppoinmentSchema = {
         name: yup.string()
             .required('Username is must required'),
@@ -45,10 +46,13 @@ function Appointment(props) {
             <section id="appointment" className="appointment">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Make an Appointment</h2>
+                        <h2>Appointment</h2>
                         <p>Aenean enim orcifg, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                             blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
+                    </div>
+                    <div activeclassName="active">
+                        <NavLink/>
                     </div>
                     <FormikProvider value={formik}>
                         <Form onSubmit={handleSubmit}>
@@ -156,4 +160,4 @@ function Appointment(props) {
     );
 }
 
-export default Appointment;
+export default BookAppointment;

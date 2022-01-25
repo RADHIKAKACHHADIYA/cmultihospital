@@ -79,14 +79,11 @@ function Login(props) {
                 }
               }
             });
-        }
+        
 
     const { handleSubmit, errors, getFieldProps } = formik;
-
-
     return (
         <div>
-
             <div className="container">
                 <div className="section-title mt-4">
                     {
@@ -189,6 +186,6 @@ function Login(props) {
             </div>
         </div >
     );
-
+}
 
 export default Login;

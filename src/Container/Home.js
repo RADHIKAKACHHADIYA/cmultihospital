@@ -1,16 +1,10 @@
-import React from 'react';
-import InputBox from "../Components/Common/InputBox/InputBox";
-import { NavLink} from "react-router-dom";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import Button, { ButtonType } from "../Components/Common/Button/Button";
-import * as yup from 'yup';
-import { Form , FormikProvider, useFormik } from 'formik';
+import React, { useState } from 'react';
 
 function Home(props) {
     const [show, setshow] = useState(false)
-  const handleModal = () => {
-    setshow(!show)
-  }
+    const handleModal = () => {
+        setshow(!show)
+    }
     return (
         <>
             <div>
@@ -200,56 +194,7 @@ function Home(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="text-center">
-              <Button buttonType={ButtonType.PRIMARY} color="danger" onClick={() => handleModal()}>
-                Read More
-              </Button>
-              <Modal toggle={() => handleModal()} isOpen={show}>
-                <div className="php-email-form">
-                  <ModalHeader toggle={() => handleModal()}>
-                        Reviews
-                  </ModalHeader>
-                  <div className="w-50 mx-auto my-4">
-                  <FormikProvider value={formik}>
-                        <Form onSubmit={handleSubmit}>
-               
-                      <InputBox 
-                        type="text" 
-                        name="name" 
-                        className="form-control mb-2" 
-                        id="name" 
-                        placeholder="Your Name" 
-                        data-rule="minlen:4" 
-                        {...getFieldProps("name")}
-                        errors={Boolean(errors.name)}
-                        errorMessage={errors.name}
-                      />
-                      <InputBox 
-                        type="email" 
-                        className="form-control" 
-                        name="email" 
-                        id="email" 
-                        placeholder="Your Email" 
-                        data-rule="email" 
-                        {...getFieldProps("email")}
-                        errors={Boolean(errors.email)}
-                        errorMessage={errors.email}
-                      />
-                      <ModalFooter>
-                <div className="d-flex mx-auto">
-                <Button buttonType={ButtonType.PRIMARY} type="submit">
-                  Submit
-                </Button>
-                  <Button buttonType={ButtonType.PRIMARY} onClick={() => handleModal()}>Cancel</Button>
-                </div>
-                </ModalFooter>
-                </Form>
-                    </FormikProvider>
-                  </div>
-                
-                </div>
-              </Modal>
-            </div>
+                            
                         </div>
                     </section>
                     <section id="gallery" className="gallery">
