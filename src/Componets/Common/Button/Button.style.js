@@ -12,6 +12,9 @@ const BaseButton = styled(Button)`
     :hover{
     background: #0d6efd;
     };
+    :focus{
+        box-shadow:none;
+    }
 
 `;
 
@@ -29,5 +32,15 @@ export const LinkButton = styled(BaseButton)`
     background: none;
     color: #0000ff;
     font-size : 16px;
+    :focus{
+        box-shadow:none;
+        border-color: none;
+        background-color:#fff !important;
+    }
+    :active{
+        background-color:#fff;
+        color:#0d6efd;
+        border-color: none;
+    }
 
 `;

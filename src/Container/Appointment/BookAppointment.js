@@ -3,9 +3,13 @@ import Button, { ButtonType } from '../../Componets/Common/Button/Button';
 import InputBox from '../../Componets/Common/Input/InputBox';
 import * as yup from 'yup';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 function BookAppointment(props) {
+
+    const History = useHistory();
+    
+
     let AppoinmentSchema = {
         name: yup.string()
             .required('Username is must required'),
@@ -24,7 +28,22 @@ function BookAppointment(props) {
     }
 
     let schema = yup.object().shape(AppoinmentSchema);
+    const handleAdd = (values) => {
 
+        let localData = JSON.parse(localStorage.getItem("appointment"))
+
+        let data = {"id": Math.floor((Math.random() * 100) + 1), ...values}
+
+        if (localData === null) {
+            localStorage.setItem("appointment",JSON.stringify([data]))
+        } else {
+            localData.push(data)
+            localStorage.setItem("appointment",JSON.stringify(localData))
+        }
+        History.push('/listAppointment')
+    }
+
+    
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -36,11 +55,11 @@ function BookAppointment(props) {
         },
         validationSchema: schema,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            handleAdd(values);
         },
     });
 
-    const { handleSubmit, errors, getFieldProps } = formik;
+    const { handleSubmit, errors, touched ,getFieldProps } = formik;
     return (
         <div>
             <section id="appointment" className="appointment">
@@ -53,8 +72,8 @@ function BookAppointment(props) {
                     </div>
                     <div className='row'>
                         <div className='col-6 text-center mb-5'>
-                            <NavLink to="/bookAppointment" 
-                            activeClassName="actactive fw-bold" >
+                            <NavLink to="/bookAppointment"
+                                activeClassName="actactive fw-bold" >
                                 Book Appointment
                             </NavLink>
                         </div>
@@ -77,8 +96,8 @@ function BookAppointment(props) {
                                             placeholder="Your Name"
                                             data-rule="minlen:4"
                                             {...getFieldProps("name")}
-                                            errors={Boolean(errors.name)}
-                                            errorMessage={errors.name}
+                                            errors={Boolean(errors.name && touched.name)}
+                                            errorMessage={(errors.name && touched.name) && errors.name }
                                         />
                                     </div>
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
@@ -90,8 +109,8 @@ function BookAppointment(props) {
                                             placeholder="Your Email"
                                             data-rule="email"
                                             {...getFieldProps("email")}
-                                            errors={Boolean(errors.email)}
-                                            errorMessage={errors.email}
+                                            errors={Boolean(errors.email && touched.email)}
+                                            errorMessage={(errors.email && touched.email) && errors.email }
                                         />
                                     </div>
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
@@ -103,8 +122,8 @@ function BookAppointment(props) {
                                             placeholder="Your Phone"
                                             data-rule="minlen:4"
                                             {...getFieldProps("phone")}
-                                            errors={Boolean(errors.phone)}
-                                            errorMessage={errors.phone}
+                                            errors={Boolean(errors.phone && touched.phone)}
+                                            errorMessage={(errors.phone && touched.phone) && errors.phone}
                                         />
                                     </div>
                                 </div>
@@ -118,8 +137,8 @@ function BookAppointment(props) {
                                             placeholder="Appointment Date"
                                             data-rule="minlen:4"
                                             {...getFieldProps("date")}
-                                            errors={Boolean(errors.date)}
-                                            errorMessage={errors.date}
+                                            errors={Boolean(errors.date && touched.date)}
+                                            errorMessage={(errors.date && touched.date) && errors.date}
                                         />
                                     </div>
                                     <div className="col-md-4 form-group mt-3">
@@ -129,8 +148,8 @@ function BookAppointment(props) {
                                             type="select"
                                             className="form-select"
                                             {...getFieldProps("department")}
-                                            errors={Boolean(errors.department)}
-                                            errorMessage={errors.department}
+                                            errors={Boolean(errors.department && touched.department)}
+                                            errorMessage={(errors.department && touched.department) && errors.department}
                                         >
                                             <option value="0">Select Department</option>
                                             <option value="Department 1">Department-1</option>
@@ -147,18 +166,18 @@ function BookAppointment(props) {
                                         id="message"
                                         placeholder="Message"
                                         {...getFieldProps("message")}
-                                        errors={Boolean(errors.message)}
-                                        errorMessage={errors.message}
+                                        errors={Boolean(errors.message  && touched.message)}
+                                        errorMessage={(errors.message && touched.message) && errors.message}
                                     />
                                 </div>
-                                {/* <div className="mb-3">
+                                <div className="mb-3">
                                     <div className="loading">Loading</div>
                                     <div className="error-message" />
                                     <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                                </div> */}
+                                </div>
                                 <div className="text-center mt-4">
                                     <Button buttonType={ButtonType.PRIMARY} type="submit">
-                                        Make an Appointment
+                                        Book Appointment
                                     </Button>
                                 </div>
                             </div>

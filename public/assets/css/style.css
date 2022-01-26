@@ -1762,7 +1762,7 @@ section {
   position: absolute;
   display: block;
   width:60%;
-  height: 3px;
+  height: 1px;
   background: #ddd;
   bottom: -10px;
   left: calc(35% - 20px);
@@ -1775,7 +1775,7 @@ section {
   width:20px;
   height: 3px;
   background: #1c84e3;
-  bottom: -10px;
+  bottom: -11px;
   left: calc(58% - 20px);
 
 }
