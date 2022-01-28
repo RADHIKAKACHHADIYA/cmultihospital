@@ -15,6 +15,10 @@ function ListAppointment(props) {
 
         setData(localData)
     }
+    const handleDelet = (id) => {
+        let localData = JSON.parse(localStorage.getItem("appointment"))
+
+    }
 
     return (
         <div>
@@ -42,7 +46,7 @@ function ListAppointment(props) {
                                 data !== undefined ?
                                     data.map((d, i) => {
                                         return (
-                                            <div 
+                                            <div
                                                 className='col-4 mb-4'
                                                 key={i}
                                             >
@@ -50,33 +54,43 @@ function ListAppointment(props) {
                                                 >
                                                     <CardBody >
                                                         <div className='ps-2'>
-                                                        <CardTitle tag="h5">
-                                                            {d.name}
-                                                        </CardTitle>
-                                                        <CardSubtitle
-                                                            className="mb-2 text-muted"
-                                                            tag="h6"
-                                                        >
-                                                            {d.email}
-                                                        </CardSubtitle>
-                                                        <CardSubtitle
-                                                            className="mb-2 text-muted"
-                                                            tag="h6"
-                                                        >
-                                                            {d.phone}
-                                                        </CardSubtitle>
-                                                        <CardSubtitle
-                                                            className="mb-2 text-muted"
-                                                            tag="h6"
-                                                        >
-                                                            {d.date}
-                                                        </CardSubtitle>
-                                                        <CardText>
-                                                            {d.message}
-                                                        </CardText>
+                                                            <CardTitle 
+                                                                tag="h5"
+                                                                className='pb-2'
+                                                            >
+                                                                Name : {d.name}
+                                                            </CardTitle>
+                                                            <CardSubtitle
+                                                                className="pb-3 text-muted"
+                                                                tag="h6"
+                                                            >
+                                                                email : {d.email}
+                                                            </CardSubtitle>
+                                                            <CardSubtitle
+                                                                className="pb-3 text-muted"
+                                                                tag="h6"
+                                                            >
+                                                                phone : {d.phone}
+                                                            </CardSubtitle>
+                                                            <CardSubtitle
+                                                                className="pb-2 text-muted"
+                                                                tag="h6"
+                                                            >
+                                                                date : {d.date}
+                                                            </CardSubtitle>
+                                                            <CardText
+                                                                className="text-muted"
+                                                            >
+                                                            message : {d.message}
+                                                            </CardText>
                                                         </div>
-                                                        <Button buttonType={ButtonType.LINK}>
+                                                        <Button buttonType={ButtonType.LINK}
+                                                            onClick={() => handleDelet(d.id)} 
+                                                            className="text-danger me-2 "                                                       >
                                                             Delet
+                                                        </Button>
+                                                        <Button buttonType={ButtonType.LINK}>
+                                                            Edit
                                                         </Button>
                                                     </CardBody>
                                                 </Card>

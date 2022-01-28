@@ -34,13 +34,15 @@ export const LinkButton = styled(BaseButton)`
     font-size : 16px;
     :focus{
         box-shadow:none;
-        border-color: none;
+        border: none;
         background-color:#fff !important;
+        color:#FF6337;
     }
     :active{
         background-color:#fff;
         color:#0d6efd;
         border-color: none;
+        color:#FF6337;
     }
 
 `;
