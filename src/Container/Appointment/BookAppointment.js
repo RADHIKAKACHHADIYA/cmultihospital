@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button, { ButtonType } from '../../Componets/Common/Button/Button';
 import InputBox from '../../Componets/Common/Input/InputBox';
 import * as yup from 'yup';
@@ -6,9 +6,38 @@ import { Form, FormikProvider, useFormik } from 'formik';
 import { NavLink, useHistory } from 'react-router-dom';
 
 function BookAppointment(props) {
+    const [update , setUpdate] = useState()
 
-    const History = useHistory();
+    const history = useHistory();
     
+    useEffect(
+        () => {
+            if((props.location.state !== undefined) && props.location.state !== null){
+                setUpdate(props.location.state)  
+            }
+            history.replace()
+        },
+    [props.location.state])
+
+    const handleEdit = (values) => {
+        let data = {
+            "id " :update.id,
+            ...values
+        }
+        let localData = JSON.parse(localStorage.getItem("appointment"))
+        let uData = localData.map((l) => {
+            if (l.id === update.id) {
+                return data
+            } else {
+                return l
+            }
+        })
+
+        localStorage.setItem("appointment", JSON.stringify(uData))
+        setUpdate()
+
+        history.push("/listAppointment")
+    }
 
     let AppoinmentSchema = {
         name: yup.string()
@@ -45,17 +74,22 @@ function BookAppointment(props) {
 
     
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            name: '',
-            email: '',
-            phone: '',
-            date: '',
-            message: '',
-            department: '',
+            name: update ? update.name : '',
+            email:update ? update.email : '',
+            phone:update ? update.phone : '',
+            date:update ? update.date : '',
+            message:update ? update.message : '',
+            department:update ? update.department : '',
         },
         validationSchema: schema,
         onSubmit: values => {
-            handleAdd(values);
+            if(update) {
+                handleEdit(values)
+            } else {
+                handleAdd(values);
+            }
         },
     });
 

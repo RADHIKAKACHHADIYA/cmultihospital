@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Button, { ButtonType } from '../../Componets/Common/Button/Button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
 function ListAppointment(props) {
@@ -16,9 +16,21 @@ function ListAppointment(props) {
         setData(localData)
     }
     const handleDelet = (id) => {
-        let localData = JSON.parse(localStorage.getItem("appointment"))
+        let localdata = JSON.parse(localStorage.getItem("appointment"))
+        const fData = localdata.filter((d) => d.id !== id)
+        localStorage.setItem("appointment", JSON.stringify(fData))
 
+
+        loadData()
     }
+    let history = useHistory();
+
+    const handleEdit = (id) => {
+        let localData = JSON.parse(localStorage.getItem("appointment"))
+        let filterData = localData.filter((l) => l.id === id)
+        history.push("/bookAppointment", filterData[0])
+    }
+
 
     return (
         <div>
@@ -54,7 +66,7 @@ function ListAppointment(props) {
                                                 >
                                                     <CardBody >
                                                         <div className='ps-2'>
-                                                            <CardTitle 
+                                                            <CardTitle
                                                                 tag="h5"
                                                                 className='pb-2'
                                                             >
@@ -81,15 +93,15 @@ function ListAppointment(props) {
                                                             <CardText
                                                                 className="text-muted"
                                                             >
-                                                            message : {d.message}
+                                                                message : {d.message}
                                                             </CardText>
                                                         </div>
                                                         <Button buttonType={ButtonType.LINK}
-                                                            onClick={() => handleDelet(d.id)} 
+                                                            onClick={() => handleDelet(d.id)}
                                                             className="text-danger me-2 "                                                       >
                                                             Delet
                                                         </Button>
-                                                        <Button buttonType={ButtonType.LINK}>
+                                                        <Button buttonType={ButtonType.LINK} onClick={() => handleEdit(d.id)}>
                                                             Edit
                                                         </Button>
                                                     </CardBody>

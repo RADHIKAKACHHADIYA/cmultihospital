@@ -44,5 +44,9 @@ export const LinkButton = styled(BaseButton)`
         border-color: none;
         color:#FF6337;
     }
+    :hover{
+        background-color:#fff;
+        color: red;
+    }
 
 `;
