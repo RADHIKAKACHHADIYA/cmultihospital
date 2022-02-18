@@ -11,12 +11,16 @@ import Login from './Container/Login'
 import Medicine from './Container/Medicine';
 import Footer from './Componets/Footer';
 import Count from './Container/Count';
+import { Provider } from 'react-redux';
 
 import { Route , Switch } from 'react-router-dom';
+import configareStore from './redux/store';
 
 function App() {
+  let store = configareStore();
   return (
     <>
+    <Provider  store={store}>
       <Header />
         <Switch>
           <Route exact path='/' component={Home}/>
@@ -31,6 +35,7 @@ function App() {
           <Route parth='/Count' component={Count} />
         </Switch>
       <Footer />
+      </Provider>
     </>
   );
 }
