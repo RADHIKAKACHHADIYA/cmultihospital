@@ -21,7 +21,7 @@ export const fetchmedicine = () => (dispatch) => {
         })
       .then(response => response.json())
       .then(medicines => dispatch({ type: actionTypes.FATCH_MEDICINE, payload: medicines }))
-      .catch(error => dispatch(errorMedicine(error)));
+      .catch(error => dispatch(errorMedicine(error.message)));
     }, 1000)
 }
 export const loadindMedicine = (status) => (dispatch) => {
