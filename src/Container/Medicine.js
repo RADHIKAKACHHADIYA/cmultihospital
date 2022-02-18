@@ -131,7 +131,7 @@ function Medicine(props) {
                                 <List key={d.id.toString()} data={d} />
                             )
                         })
-                        : <p className='text-center text-danger fw-bold'> something went wrong</p>
+                        : <p className='text-center text-danger fw-bold'>{medicine.errMessage}</p>
                     : <Loder />
                 }
             </div>
