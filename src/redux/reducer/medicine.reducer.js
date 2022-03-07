@@ -1,4 +1,4 @@
-import * as actionTypes from "../actionTypes";
+import * as ActionTypes from "../ActionTypes";
 
 const initialValue = {
     medicine : [],
@@ -8,22 +8,21 @@ const initialValue = {
 
 const medicineReducer = (state=initialValue , Action) => {
     switch (Action.type) {
-        case actionTypes.LODING_MEDICINE :
+        case ActionTypes.LODING_MEDICINE :
             return {
                 ...state,
                 medicine : [],
                 isLoading : Action.payload,
-                errMessage : ''
-
+                errMessage : '',
             }
-        case actionTypes.FATCH_MEDICINE :
+        case ActionTypes.FATCH_MEDICINE :
             return {
                 ...state,
                 medicine : Action.payload,
                 errMessage : '',
                 isLoading : false
             }
-        case actionTypes.ERROR_MEDICINE :
+        case ActionTypes.ERROR_MEDICINE :
             return {
                 ...state,
                 medicine : [],

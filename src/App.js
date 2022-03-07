@@ -11,31 +11,41 @@ import Login from './Container/Login'
 import Medicine from './Container/Medicine';
 import Footer from './Componets/Footer';
 import Count from './Container/Count';
-import { Provider } from 'react-redux';
-
-import { Route , Switch } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Route, Switch } from 'react-router-dom';
 import configareStore from './redux/store';
 
+import { Provider } from 'react-redux';
+import ThemeContext, { ThemeProvider } from './context/ThemeContext';
+
 function App() {
-  let store = configareStore();
+
+  let { store, persistor } = configareStore();
   return (
     <>
-    <Provider  store={store}>
-      <Header />
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/About' component={About}/>
-          <Route path='/listappointment' component={ListAppointment}/>
-          <Route path='/bookAppointment' component={BookAppointment}/>
-          <Route path='/Contact' component={Contact}/>
-          <Route path='/Departments' component={Departments}/>
-          <Route path='/Doctors' component={Doctors}/>
-          <Route path='/medicine' component={Medicine}/>
-          <Route path='/login' component={Login} />
-          <Route parth='/Count' component={Count} />
-        </Switch>
-      <Footer />
-      </Provider>
+      
+        <Provider store={store} >
+        <ThemeProvider>
+          <PersistGate loading={null} persistor={persistor}>
+            <Header />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/About' component={About} />
+              <Route path='/listappointment' component={ListAppointment} />
+              <Route path='/bookAppointment' component={BookAppointment} />
+              <Route path='/Contact' component={Contact} />
+              <Route path='/Departments' component={Departments} />
+              <Route path='/Doctors' component={Doctors} />
+              <Route path='/medicine' component={Medicine} />
+              <Route path='/login' component={Login} />
+              <Route parth='/Count' component={Count} />
+              <Route path='/themeContaxt' component={ThemeContext} />
+            </Switch>
+            <Footer />
+          </PersistGate>
+          </ThemeProvider>
+        </Provider>
+      
     </>
   );
 }

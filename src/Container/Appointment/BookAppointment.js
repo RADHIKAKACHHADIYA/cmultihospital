@@ -22,7 +22,12 @@ function BookAppointment(props) {
     const handleEdit = (values) => {
         let data = {
             "id " :update.id,
-            ...values
+            "name": values.name,
+            "email": values.email,
+            "phone": parseInt(values.phone),
+            "date": parseInt(values.date),
+            "message": values.message,
+            "department": values.department
         }
         let localData = JSON.parse(localStorage.getItem("appointment"))
         let uData = localData.map((l) => {
@@ -57,6 +62,7 @@ function BookAppointment(props) {
     }
 
     let schema = yup.object().shape(AppoinmentSchema);
+
     const handleAdd = (values) => {
 
         let localData = JSON.parse(localStorage.getItem("appointment"))
@@ -69,7 +75,7 @@ function BookAppointment(props) {
             localData.push(data)
             localStorage.setItem("appointment",JSON.stringify(localData))
         }
-        History.push('/listAppointment')
+        history.push('/listAppointment')
     }
 
     
@@ -78,8 +84,8 @@ function BookAppointment(props) {
         initialValues: {
             name: update ? update.name : '',
             email:update ? update.email : '',
-            phone:update ? update.phone : '',
-            date:update ? update.date : '',
+            phone:parseInt(update ? update.phone : ''),
+            date:parseInt(update ? update.date : ''),
             message:update ? update.message : '',
             department:update ? update.department : '',
         },
@@ -93,7 +99,7 @@ function BookAppointment(props) {
         },
     });
 
-    const { handleSubmit, errors, touched ,getFieldProps } = formik;
+    const { handleSubmit, errors, touched , handleBlur, handleChange ,getFieldProps } = formik;
     return (
         <div>
             <section id="appointment" className="appointment">
@@ -129,7 +135,9 @@ function BookAppointment(props) {
                                             id="name"
                                             placeholder="Your Name"
                                             data-rule="minlen:4"
-                                            {...getFieldProps("name")}
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
                                             errors={Boolean(errors.name && touched.name)}
                                             errorMessage={(errors.name && touched.name) && errors.name }
                                         />
@@ -142,7 +150,9 @@ function BookAppointment(props) {
                                             id="email"
                                             placeholder="Your Email"
                                             data-rule="email"
-                                            {...getFieldProps("email")}
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
                                             errors={Boolean(errors.email && touched.email)}
                                             errorMessage={(errors.email && touched.email) && errors.email }
                                         />
@@ -155,7 +165,9 @@ function BookAppointment(props) {
                                             id="phone"
                                             placeholder="Your Phone"
                                             data-rule="minlen:4"
-                                            {...getFieldProps("phone")}
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
                                             errors={Boolean(errors.phone && touched.phone)}
                                             errorMessage={(errors.phone && touched.phone) && errors.phone}
                                         />
@@ -170,7 +182,9 @@ function BookAppointment(props) {
                                             id="date"
                                             placeholder="Appointment Date"
                                             data-rule="minlen:4"
-                                            {...getFieldProps("date")}
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
                                             errors={Boolean(errors.date && touched.date)}
                                             errorMessage={(errors.date && touched.date) && errors.date}
                                         />
@@ -181,7 +195,9 @@ function BookAppointment(props) {
                                             id="department"
                                             type="select"
                                             className="form-select"
-                                            {...getFieldProps("department")}
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
                                             errors={Boolean(errors.department && touched.department)}
                                             errorMessage={(errors.department && touched.department) && errors.department}
                                         >
@@ -199,7 +215,9 @@ function BookAppointment(props) {
                                         type="textarea"
                                         id="message"
                                         placeholder="Message"
-                                        {...getFieldProps("message")}
+                                        variant="standard"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
                                         errors={Boolean(errors.message  && touched.message)}
                                         errorMessage={(errors.message && touched.message) && errors.message}
                                     />
@@ -211,7 +229,7 @@ function BookAppointment(props) {
                                 </div>
                                 <div className="text-center mt-4">
                                     <Button buttonType={ButtonType.PRIMARY} type="submit">
-                                        Book Appointment
+                                        {update ? "Update" : " Book Appointment"}
                                     </Button>
                                 </div>
                             </div>
@@ -224,3 +242,4 @@ function BookAppointment(props) {
 }
 
 export default BookAppointment;
+

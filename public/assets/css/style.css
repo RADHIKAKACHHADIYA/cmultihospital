@@ -1779,3 +1779,11 @@ section {
   left: calc(58% - 20px);
 
 }
+.dark{
+  background-color: #111;
+  color: #ddd;
+}
+.light{
+  background-color: #ddd;
+  color: #111;
+}

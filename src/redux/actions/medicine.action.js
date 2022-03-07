@@ -1,11 +1,19 @@
+import { fatchAllMedicineData } from "../../common/api/medicine_api";
 import baseUrl from "../../url/baseUrl";
-import * as actionTypes from "../actionTypes";
+import * as ActionTypes from "../ActionTypes";
 
 
 export const fetchmedicine = () => (dispatch) => {
   dispatch(loadindMedicine(true))
+//   try {
+//     fatchAllMedicineData()
+//         .then(response => dispatch({ type: ActionTypes.FATCH_MEDICINE, payload: response.data }))
+//         .catch(error => dispatch(errorMedicine(error)));
+// } catch (error) {
+//     dispatch(errorMedicine(error));
+// }
   setTimeout (function () {
-    return fetch(baseUrl + 'medicines')
+    return fetch(baseUrl + 'medicine')
       .then(response => {
         if (response.ok) {
           return response;
@@ -20,19 +28,19 @@ export const fetchmedicine = () => (dispatch) => {
           throw errmess;
         })
       .then(response => response.json())
-      .then(medicines => dispatch({ type: actionTypes.FATCH_MEDICINE, payload: medicines }))
+      .then(medicines => dispatch({ type: ActionTypes.FATCH_MEDICINE, payload: medicines }))
       .catch(error => dispatch(errorMedicine(error.message)));
     }, 1000)
 }
 export const loadindMedicine = (status) => (dispatch) => {
   dispatch({
-    type: actionTypes.LODING_MEDICINE,
+    type: ActionTypes.LODING_MEDICINE,
     payload: status
   })
 }
 export const errorMedicine = (error) => (dispatch) => {
       dispatch({
-        type:  actionTypes.ERROR_MEDICINE ,
+        type:  ActionTypes.ERROR_MEDICINE ,
         payload: error
       })
 
