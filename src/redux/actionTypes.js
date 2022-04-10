@@ -1,3 +1,6 @@
 export const FATCH_MEDICINE = "FATCH_MEDICINE";
 export const ERROR_MEDICINE = "ERROR_MEDICINE";
 export const LODING_MEDICINE = "LODING_MEDICINE"
+
+
+export const ADD_SIGNUP = "ADD_SIGNUP";

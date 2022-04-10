@@ -1,6 +1,6 @@
 import { fatchAllMedicineData } from "../../common/api/medicine_api";
 import baseUrl from "../../url/baseUrl";
-import * as ActionTypes from "../ActionTypes";
+import * as ActionTypes from "../actionTypes"
 
 
 export const fetchmedicine = () => (dispatch) => {
