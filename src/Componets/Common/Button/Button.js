@@ -7,7 +7,7 @@ export const ButtonType = {
 }
 
 function Button({buttonType, children ,...rest}) {
-    console.log(buttonType === ButtonType.PRIMARY)
+    // console.log(buttonType === ButtonType.PRIMARY)
     if (buttonType === ButtonType.PRIMARY) {
         return (
             <PrimaryButton {...rest}>

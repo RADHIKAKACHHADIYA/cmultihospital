@@ -3,11 +3,17 @@ import Button, { ButtonType } from '../Componets/Common/Button/Button';
 import InputBox from "../Componets/Common/Input/InputBox";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
+import { useDispatch, useSelector } from 'react-redux';
+import { addSignup } from '../redux/actions/signup.action';
+import { db } from '../firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 function Login(props) {
     const [userType, setuserType] = useState('Login')
     const [name, setName] = useState('')
     const [reset, setReset] = useState(false)
+    const dispatch= useDispatch()
+    const users= useSelector(state => state.signup);
 
     const handleLogin = (values) => {
             let usersData = JSON.parse(localStorage.getItem("users"))
@@ -19,16 +25,24 @@ function Login(props) {
             }
     };
 
-    const handleSignup = () => {
-        console.log(name)
+    const handleSignup = async (values) => {
+        try {
+            const docRef = await addDoc(collection(db, "users"), {
+              email: values.email,
+              password: values.password
+            });
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
     }
 
     const handleReset = () => {
     }
 
-
     const handleGoogleLogin = () => {
     };
+
     const LoginSchema = {
         name: yup.string()
             .required("Name is must be requrired"),
