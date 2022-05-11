@@ -4,37 +4,35 @@ import InputBox from "../Componets/Common/Input/InputBox";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from 'react-redux';
-import { addSignup } from '../redux/actions/signup.action';
+import { addSignup, signUpUser } from '../redux/actions/signup.action';
 import { db } from '../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 
 function Login(props) {
     const [userType, setuserType] = useState('Login')
     const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [reset, setReset] = useState(false)
-    const dispatch= useDispatch()
-    const users= useSelector(state => state.signup);
+    const dispatch = useDispatch()
+    const users = useSelector(state => state.signup);
 
     const handleLogin = (values) => {
-            let usersData = JSON.parse(localStorage.getItem("users"))
-            if (usersData === null){
-              localStorage.setItem("users", JSON.stringify([values]))
-            } else {
-              usersData.push(values)
-              localStorage.setItem("users", JSON.stringify(usersData))
-            }
+
+        // let usersData = JSON.parse(localStorage.getItem("users"))
+        // if (usersData === null){
+        //   localStorage.setItem("users", JSON.stringify([values]))
+        // } else {
+        //   usersData.push(values)
+        //   localStorage.setItem("users", JSON.stringify(usersData))
+        // }
     };
 
     const handleSignup = async (values) => {
-        try {
-            const docRef = await addDoc(collection(db, "users"), {
-              email: values.email,
-              password: values.password
-            });
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
+        console.log("handleSignup")
+        console.log(values)
+        dispatch(signUpUser(values))
+
     }
 
     const handleReset = () => {
@@ -43,9 +41,8 @@ function Login(props) {
     const handleGoogleLogin = () => {
     };
 
+  
     const LoginSchema = {
-        name: yup.string()
-            .required("Name is must be requrired"),
         email: yup.string()
             .required("E-mail is must required")
             .email("Invalid"),
@@ -54,6 +51,8 @@ function Login(props) {
             .min(8, "Password is must 8 character long"),
     };
     const SignupSchema = {
+        name: yup.string()
+            .required("Name is must be requrired"),
         email: yup.string()
             .required("E-mail is must required")
             .email("Invalid"),
@@ -70,7 +69,7 @@ function Login(props) {
     let schema;
     if (reset === true ? null : userType === "Signup") {
         schema = yup.object().shape(SignupSchema)
-    } else if(reset === true ? null : userType === "Login") {
+    } else if (reset === true ? null : userType === "Login") {
         schema = yup.object().shape(LoginSchema)
     } else {
         schema = yup.object().shape(ResetSchema)
@@ -83,17 +82,18 @@ function Login(props) {
             password: "",
         },
         validationSchema: schema,
-            onSubmit: (values) => {
-                if (!reset && userType === "Signup") {
-                    handleSignup(values);
-                } else if (!reset && userType === "Login") {
-                    handleLogin(values);
-                } else {
-                    handleReset(values);
-                }
-              }
-            });
-        
+        onSubmit: (values) => {
+            console.log(userType)
+            if (!reset && userType === "Signup") {
+                handleSignup(values);
+            } else if (!reset && userType === "Login") {
+                handleLogin(values);
+            } else {
+                handleReset(values);
+            }
+        }
+    });
+
 
     const { handleSubmit, errors, getFieldProps } = formik;
     return (
@@ -103,9 +103,9 @@ function Login(props) {
                     {
                         reset === true ? <h2> forgot password</h2> :
                             userType === 'Signup' ?
-                                <h2> Sign Up</h2>
+                                <h2>Sign up</h2>
                                 :
-                                <h2>Log In</h2>
+                                <h2>Log in</h2>
                     }
                 </div>
                 <FormikProvider value={formik}>
@@ -114,8 +114,7 @@ function Login(props) {
                             <div className="row justify-content-center">
                                 <div className="col-md-6 form-group mt-3">
                                     {
-                                        reset === true ? null :
-                                            userType === 'Login' ?
+                                        reset === true ? null : userType === 'Signup' ?
                                                 <div className="row">
                                                     <InputBox
                                                         type="text"
@@ -140,6 +139,7 @@ function Login(props) {
                                         className="form-control"
                                         name="email"
                                         id="email"
+                                        onChange={(e) => setEmail(e.target.value)}
                                         placeholder="Your Email"
                                         {...getFieldProps("email")}
                                         errors={Boolean(errors.email)}
@@ -155,7 +155,8 @@ function Login(props) {
                                                 type="password"
                                                 className="form-control"
                                                 name="password"
-                                                id="password"
+                                                id="password" s
+                                                onChange={(e) => setPassword(e.target.value)}
                                                 placeholder="Your Password"
                                                 {...getFieldProps("password")}
                                                 errors={Boolean(errors.password)}
@@ -170,24 +171,26 @@ function Login(props) {
                                         <Button buttonType={ButtonType.PRIMARY} type="submit" >Submit</Button>
 
                                         :
-                                        userType === 'Login' ?
-                                            <Button buttonType={ButtonType.PRIMARY} type="submit">Log in</Button>
+                                        userType === 'Signup' ?
+                                            <Button buttonType={ButtonType.PRIMARY} type="submit">Sign Up</Button>
                                             :
-                                            <Button buttonType={ButtonType.PRIMARY} type="submit" >sign up</Button>
+                                            <Button buttonType={ButtonType.PRIMARY} type="submit" >Log In</Button>
                                 }
                             </div>
                             <div className="text-center my-4 ps-0">
                                 {
-                                    userType === 'Login' ?
-                                        <div>
-                                            <label className="pe-2">don't have an account :</label>
-                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(); setuserType('Signup') }}>Sign up</Button>
-                                        </div>
-                                        :
+                                    userType === 'Signup' ?
                                         <div>
                                             <label>Already have an account?</label>
-                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(); setuserType('Login') }}>Log in</Button>
+                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(false); setuserType('Signup') }}>Log in</Button>
                                         </div>
+
+                                        :
+                                        <div>
+                                            <label className="pe-2">don't have an account :</label>
+                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(false); setuserType('Login') }}>Sign up</Button>
+                                        </div>
+
                                 }
                             </div>
                             <div className="text-center">

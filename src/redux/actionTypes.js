@@ -4,3 +4,5 @@ export const LODING_MEDICINE = "LODING_MEDICINE"
 
 
 export const ADD_SIGNUP = "ADD_SIGNUP";
+
+export const SIGNUP_AUTH = "SIGNUP_AUTH";
