@@ -14,6 +14,8 @@ import Count from './Container/Count';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Route, Switch } from 'react-router-dom';
 import configareStore from './redux/store';
+import { SnackbarProvider } from 'notistack';
+
 
 import { Provider } from 'react-redux';
 import ThemeContext, { ThemeProvider } from './context/ThemeContext';
@@ -23,7 +25,7 @@ function App() {
   let { store, persistor } = configareStore();
   return (
     <>
-      
+      <SnackbarProvider maxSnack={3}>
         <Provider store={store} >
         <ThemeProvider>
           <PersistGate loading={null} persistor={persistor}>
@@ -45,7 +47,7 @@ function App() {
           </PersistGate>
           </ThemeProvider>
         </Provider>
-      
+      </SnackbarProvider>
     </>
   );
 }

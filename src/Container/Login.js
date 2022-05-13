@@ -4,8 +4,9 @@ import InputBox from "../Componets/Common/Input/InputBox";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from 'react-redux';
-import { addSignup, signUpUser } from '../redux/actions/signup.action';
+import { addSignup, googleSignupAuth, signUpUser } from '../redux/actions/signup.action';
 import { db } from '../firebase';
+import { NavLink } from 'react-router-dom';
 import { addDoc, collection } from 'firebase/firestore';
 
 function Login(props) {
@@ -28,7 +29,7 @@ function Login(props) {
         // }
     };
 
-    const handleSignup = async (values) => {
+    const handleSignup = (values) => {
         console.log("handleSignup")
         console.log(values)
         dispatch(signUpUser(values))
@@ -38,10 +39,11 @@ function Login(props) {
     const handleReset = () => {
     }
 
-    const handleGoogleLogin = () => {
+    const handleGoogleSignup = () => {
+        dispatch(googleSignupAuth())
     };
 
-  
+
     const LoginSchema = {
         email: yup.string()
             .required("E-mail is must required")
@@ -115,20 +117,20 @@ function Login(props) {
                                 <div className="col-md-6 form-group mt-3">
                                     {
                                         reset === true ? null : userType === 'Signup' ?
-                                                <div className="row">
-                                                    <InputBox
-                                                        type="text"
-                                                        name="name"
-                                                        className="form-control"
-                                                        id="name"
-                                                        onChange={(e) => setName(e.target.value)}
-                                                        placeholder="Your Name"
-                                                        {...getFieldProps("name")}
-                                                        errors={Boolean(errors.name)}
-                                                        errorMessage={errors.name}
-                                                    />
-                                                </div>
-                                                : null
+                                            <div className="row">
+                                                <InputBox
+                                                    type="text"
+                                                    name="name"
+                                                    className="form-control"
+                                                    id="name"
+                                                    onChange={(e) => setName(e.target.value)}
+                                                    placeholder="Your Name"
+                                                    {...getFieldProps("name")}
+                                                    errors={Boolean(errors.name)}
+                                                    errorMessage={errors.name}
+                                                />
+                                            </div>
+                                            : null
                                     }
                                 </div>
                             </div>
@@ -165,11 +167,29 @@ function Login(props) {
                                         </div>
                                     </div>
                             }
-                            <div className="mt-4 text-center">
+
+                            {reset === true ? null : userType === "Signup" ? (
+                                <div className="text-center">
+                                    <p className="mt-4 mb-4"> OR </p>
+                                    {/* <NavLink
+                                        to={{ pathname: "https://accounts.google.com/" }}
+                                        target="_blank"
+                                    > */}
+                                        <Button
+                                            social=""
+                                            buttonType={ButtonType.PRIMARY}
+                                            onClick={() => handleGoogleSignup()}
+                                        >
+                                            Login With Google
+                                        </Button>
+                                    {/* </NavLink> */}
+                                </div>
+                            ) : null}
+
+                            <div className="mt-5 text-center">
                                 {
                                     reset === true ?
                                         <Button buttonType={ButtonType.PRIMARY} type="submit" >Submit</Button>
-
                                         :
                                         userType === 'Signup' ?
                                             <Button buttonType={ButtonType.PRIMARY} type="submit">Sign Up</Button>
@@ -181,14 +201,14 @@ function Login(props) {
                                 {
                                     userType === 'Signup' ?
                                         <div>
-                                            <label>Already have an account?</label>
-                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(false); setuserType('Signup') }}>Log in</Button>
+                                            <label>don't have an account :</label>
+                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(false); setuserType('Login') }}>Log in</Button>
                                         </div>
 
                                         :
                                         <div>
-                                            <label className="pe-2">don't have an account :</label>
-                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(false); setuserType('Login') }}>Sign up</Button>
+                                            <label className="pe-2">Already have an account?</label>
+                                            <Button buttonType={ButtonType.LINK} onClick={() => { setReset(false); setuserType('Signup') }}>Sign up</Button>
                                         </div>
 
                                 }
