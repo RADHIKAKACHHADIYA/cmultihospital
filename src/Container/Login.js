@@ -4,7 +4,7 @@ import InputBox from "../Componets/Common/Input/InputBox";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from 'react-redux';
-import { addSignup, googleSignupAuth, signUpUser } from '../redux/actions/signup.action';
+import { addSignup, googleSignupAuth, loginUser, signUpUser } from '../redux/actions/signup.action';
 import { db } from '../firebase';
 import { NavLink } from 'react-router-dom';
 import { addDoc, collection } from 'firebase/firestore';
@@ -27,6 +27,7 @@ function Login(props) {
         //   usersData.push(values)
         //   localStorage.setItem("users", JSON.stringify(usersData))
         // }
+        dispatch(loginUser(values))
     };
 
     const handleSignup = (values) => {

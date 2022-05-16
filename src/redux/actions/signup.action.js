@@ -1,6 +1,8 @@
 import * as ActionTypes from '../actionTypes';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { setAlert } from './alert.action';
+import { color } from '@mui/system';
 
 export const signUpUser = (value) => (dispatch) => {
   console.log(value.email, value.password);
@@ -35,8 +37,10 @@ export const loginUser = (value) => (dispatch) => {
 
       if (user.emailVerified) {
         console.log("user login successfully")
+        dispatch(setAlert("user login successfully", 'success'))
       } else {
         console.log("please verify your email")
+        dispatch(setAlert("please verify your email", 'error'))
       }
     })
     .catch((error) => {
@@ -47,8 +51,10 @@ export const loginUser = (value) => (dispatch) => {
 
       if (errorCode === "auth/user-not-found") {
         console.log("User does not exist")
+        dispatch(setAlert("User does not exist", 'error'))
       } else if (errorCode === "auth/wrong-password") {
         console.log("Invalid email or password")
+        dispatch(setAlert("Invalid email or password", 'error'))
       }
     });
 

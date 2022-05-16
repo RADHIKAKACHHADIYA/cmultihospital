@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Switch from "react-switch";
 import { NavLink } from 'react-router-dom';
 import ThemeContext from '../context/ThemeContext';
+import Alert from './Alert/Alert';
 
 function Header() {
 
@@ -16,6 +17,7 @@ function Header() {
                             <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
                             <i className="bi bi-phone" /> +91 9988776655
                         </div>
+                        <Alert />
                         <div className="d-none d-lg-flex social-links align-items-center">
                             <NavLink className="twitter" to={{ pathname: "https://twitter.com/" }} target="_blank">
                                 <i className="bi bi-twitter" />
