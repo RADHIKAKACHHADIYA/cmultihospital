@@ -23,9 +23,6 @@ export const PrimaryButton = styled(BaseButton)`
     color: #fff;
     padding: 8px 25px;
     font-size : 18px;
-    :honer{
-        
-    }
 `;
 
 export const LinkButton = styled(BaseButton)`
@@ -49,4 +46,21 @@ export const LinkButton = styled(BaseButton)`
         color: red;
     }
 
+`;
+export const OutlinedButton = styled(BaseButton)`
+    background: transparent ;
+    color:#ff6337;
+    border: 2px solid; 
+    padding: 8px 25px;
+    font-size : 18px;
+    :hover{
+        background-color: transparent;
+        color: #0d6efd;
+        border: 2px solid #0d6efd;
+    }
+    :focus {
+        box-shadow:none;
+        border: none ;
+        background-color: transparent;
+    }
 `;

@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { setAlert } from './alert.action';
 import { color } from '@mui/system';
 
@@ -14,6 +14,7 @@ export const signUpUser = (value) => (dispatch) => {
         sendEmailVerification(user)
           .then(() => {
             console.log("verification mail send on your email address")
+            dispatch(setAlert("verification mail send on your email address", 'success'))
           });
         dispatch({ type: ActionTypes.SIGNUP_AUTH, payload: value.email })
       })
@@ -37,6 +38,9 @@ export const loginUser = (value) => (dispatch) => {
 
       if (user.emailVerified) {
         console.log("user login successfully")
+        sessionStorage.getItem("user", user.uid)
+        console.log(user.uid , "><>")
+        dispatch({ type: ActionTypes.LOGIN_AUTH, payload: user.uid })
         dispatch(setAlert("user login successfully", 'success'))
       } else {
         console.log("please verify your email")
@@ -82,6 +86,22 @@ export const googleSignupAuth = (value) => (dispatch) => {
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
     });
+}
+
+export const signoutUser = () => (dispatch) => {
+  // const auth = getAuth();
+  try {
+    signOut(auth).then(() => {
+      sessionStorage.setItem("user")
+      dispatch({ type: ActionTypes.LOGOUT_AUTH })
+    }).catch((error) => {
+      // An error happened.
+      console.log(error)
+    });
+
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 // export const addSignup = (data) => (dispatch) => {

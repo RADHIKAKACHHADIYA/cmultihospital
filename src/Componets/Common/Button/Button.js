@@ -1,9 +1,10 @@
 import React from 'react';
-import {LinkButton, PrimaryButton } from './Button.style';
+import {LinkButton, OutlinedButton, PrimaryButton } from './Button.style';
 
 export const ButtonType = {
     PRIMARY : "PRIMARY",
-    LINK : "LINK"
+    LINK : "LINK",
+    OUTLINE:"OUTLINE"
 }
 
 function Button({buttonType, children ,...rest}) {
@@ -19,6 +20,12 @@ function Button({buttonType, children ,...rest}) {
             <LinkButton {...rest}>
                 {children}
             </LinkButton>
+        )
+    } else if (buttonType === ButtonType.OUTLINE) {
+        return (
+            <OutlinedButton {...rest}>
+                {children}
+            </OutlinedButton>
         )
     }
     return (

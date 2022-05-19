@@ -15,10 +15,13 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Route, Switch } from 'react-router-dom';
 import configareStore from './redux/store';
 import { SnackbarProvider } from 'notistack';
+// import PubliceRoute from '/'
 
 
 import { Provider } from 'react-redux';
 import ThemeContext, { ThemeProvider } from './context/ThemeContext';
+import PublicRoute from './route/PublicRoute';
+import PriveteRoute from './route/PriveteRoute';
 
 function App() {
 
@@ -31,17 +34,17 @@ function App() {
           <PersistGate loading={null} persistor={persistor}>
             <Header />
             <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/About' component={About} />
-              <Route path='/listappointment' component={ListAppointment} />
-              <Route path='/bookAppointment' component={BookAppointment} />
-              <Route path='/Contact' component={Contact} />
-              <Route path='/Departments' component={Departments} />
-              <Route path='/Doctors' component={Doctors} />
-              <Route path='/medicine' component={Medicine} />
-              <Route path='/login' component={Login} />
-              <Route parth='/Count' component={Count} />
-              <Route path='/themeContaxt' component={ThemeContext} />
+              <PublicRoute exact path='/' component={Home} />
+              <PublicRoute path='/About' component={About} />
+              <PublicRoute path='/listappointment' component={ListAppointment} />
+              <PublicRoute path='/bookAppointment' component={BookAppointment} />
+              <PublicRoute path='/Contact' component={Contact} />
+              <PublicRoute path='/Departments' component={Departments} />
+              <PublicRoute path='/Doctors' component={Doctors} />
+              <PriveteRoute path='/medicine' component={Medicine} />
+              <PublicRoute path='/login' component={Login} />
+              <PublicRoute parth='/Count' component={Count} />
+              <PublicRoute path='/themeContaxt' component={ThemeContext} />
             </Switch>
             <Footer />
           </PersistGate>

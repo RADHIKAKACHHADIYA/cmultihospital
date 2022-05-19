@@ -169,23 +169,7 @@ function Login(props) {
                                     </div>
                             }
 
-                            {reset === true ? null : userType === "Signup" ? (
-                                <div className="text-center">
-                                    <p className="mt-4 mb-4"> OR </p>
-                                    {/* <NavLink
-                                        to={{ pathname: "https://accounts.google.com/" }}
-                                        target="_blank"
-                                    > */}
-                                        <Button
-                                            social=""
-                                            buttonType={ButtonType.PRIMARY}
-                                            onClick={() => handleGoogleSignup()}
-                                        >
-                                            Login With Google
-                                        </Button>
-                                    {/* </NavLink> */}
-                                </div>
-                            ) : null}
+
 
                             <div className="mt-5 text-center">
                                 {
@@ -198,6 +182,24 @@ function Login(props) {
                                             <Button buttonType={ButtonType.PRIMARY} type="submit" >Log In</Button>
                                 }
                             </div>
+                            {reset === true ? null : userType === "Signup" ? (
+                                <div className="text-center">
+                                    <p className="mt-4 mb-4"> OR </p>
+                                    {/* <NavLink
+                                        to={{ pathname: "https://accounts.google.com/" }}
+                                        target="_blank"
+                                    > */}
+                                    <Button
+                                        social=""
+                                        buttonType={ButtonType.OUTLINE}
+                                        onClick={() => handleGoogleSignup()}
+                                    >
+                                        Signup With Google
+                                    </Button>
+
+                                    {/* </NavLink> */}
+                                </div>
+                            ) : null}
                             <div className="text-center my-4 ps-0">
                                 {
                                     userType === 'Signup' ?
